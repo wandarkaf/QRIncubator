@@ -10,12 +10,6 @@
   "main": "./dist/qr-incubator.umd.cjs",
   "module": "./dist/qr-incubator.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/qr-incubator.js",
-      "require": "./dist/qr-incubator.umd.cjs"
-    }
-  },
   "homepage": "",
   "files": [
     "dist"
