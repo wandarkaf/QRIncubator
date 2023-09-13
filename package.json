@@ -6,6 +6,7 @@
   },
   "version": "0.1.2",
   "description": "",
+  "type": "module",
   "main": "./dist/qr-incubator.umd.cjs",
   "module": "./dist/qr-incubator.js",
   "types": "./dist/index.d.ts",
