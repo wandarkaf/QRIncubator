@@ -9,7 +9,7 @@
   "type": "module",
   "main": "./dist/qr-incubator.umd.cjs",
   "module": "./dist/qr-incubator.js",
-  "types": "./dist/qrcode.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/qr-incubator.js",
