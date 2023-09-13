@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'my-lib',
-      fileName: 'my-lib'
+      name: 'qr-incubator',
+      fileName: 'qr-incubator'
     }
   },
   plugins: [dts()]

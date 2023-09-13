@@ -6,13 +6,13 @@
   },
   "version": "0.1.0",
   "description": "",
-  "main": "./dist/my-lib.umd.cjs",
-  "module": "./dist/my-lib.js",
+  "main": "./dist/qr-incubator.umd.cjs",
+  "module": "./dist/qr-incubator.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.js",
-      "require": "./dist/my-lib.umd.cjs"
+      "import": "./dist/qr-incubator.js",
+      "require": "./dist/qr-incubator.umd.cjs"
     }
   },
   "homepage": "",
@@ -33,7 +33,7 @@
   "author": "Alonso Lamas <lamas.alonso@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wandarkaf/qrincubator/issues"
+    "url": "https://github.com/wandarkaf/QRIncubator/issues"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
