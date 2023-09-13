@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/wandarkaf/QRIncubator"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "./dist/qr-incubator.umd.cjs",
   "module": "./dist/qr-incubator.js",
