@@ -5,15 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 devDependencies:
-  '@tsconfig/node18':
-    specifier: ^18.2.2
-    version: 18.2.2
   '@types/node':
     specifier: ^20.6.0
     version: 20.6.0
-  '@vue/tsconfig':
-    specifier: ^0.4.0
-    version: 0.4.0
   prettier:
     specifier: ^3.0.3
     version: 3.0.3
@@ -345,10 +339,6 @@ packages:
       string-argv: 0.3.2
     dev: true
 
-  /@tsconfig/node18@18.2.2:
-    resolution: {integrity: sha512-d6McJeGsuoRlwWZmVIeE8CUA27lu6jLjvv1JzqmpsytOYYbVi1tHZEnwCNVOXnj4pyLvneZlFlpXUK+X9wBWyw==}
-    dev: true
-
   /@types/argparse@1.0.38:
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==}
     dev: true
@@ -422,10 +412,6 @@ packages:
 
   /@vue/shared@3.3.4:
     resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
-    dev: true
-
-  /@vue/tsconfig@0.4.0:
-    resolution: {integrity: sha512-CPuIReonid9+zOG/CGTT05FXrPYATEqoDGNrEaqS4hwcw5BUNM2FguC0mOwJD4Jr16UpRVl9N0pY3P+srIbqmg==}
     dev: true
 
   /@vue/typescript@1.8.11(typescript@5.2.2):

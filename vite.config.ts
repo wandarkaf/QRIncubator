@@ -11,5 +11,5 @@ export default defineConfig({
       fileName: 'qr-incubator'
     }
   },
-  plugins: [dts()]
+  plugins: [dts({ rollupTypes: true })]
 })
