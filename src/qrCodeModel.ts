@@ -8,13 +8,13 @@ import {
   getBCHTypeInfo,
   getMask
 } from './utils'
+import type { QRRSBlock } from './types'
 
 import QRPolynomial from './qrPolynomial'
 import QR8bitByte from './qr8bitByte'
-import QRRSBlock from './qrRSBlock'
 import QRBitBuffer from './qrBitBuffer'
 
-export default class QRCodeModel {
+class QRCodeModel {
   typeNumber: number
   errorCorrectLevel: number
   modules: boolean[][] | null[][] = []
@@ -25,7 +25,7 @@ export default class QRCodeModel {
   PAD1 = 0x11
   RS_BLOCK_TABLE = RS_BLOCK_TABLE
 
-  constructor(typeNumber: number, errorCorrectLevel: number) {
+  constructor(typeNumber: number, errorCorrectLevel: number = 2) {
     this.typeNumber = typeNumber
     this.errorCorrectLevel = errorCorrectLevel
   }
@@ -57,7 +57,7 @@ export default class QRCodeModel {
       const totalCount = rsBlock[i * 3 + 1]
       const dataCount = rsBlock[i * 3 + 2]
       for (let j = 0; j < count; j++) {
-        list.push(new QRRSBlock(totalCount, dataCount))
+        list.push({ totalCount, dataCount })
       }
     }
     return list
@@ -140,7 +140,7 @@ export default class QRCodeModel {
   }
   addData(data: string): void {
     const newData = new QR8bitByte(data)
-    this.dataList.push(newData)
+    this.dataList = [newData]
     this.dataCache = null
   }
   isDark(row: number, col: number): boolean | null {
@@ -312,3 +312,5 @@ export default class QRCodeModel {
     }
   }
 }
+
+export default QRCodeModel

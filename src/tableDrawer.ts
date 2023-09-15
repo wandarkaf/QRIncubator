@@ -1,19 +1,20 @@
 import type QRCodeModel from './qrCodeModel'
-import type { IOptions } from './types'
+import type { qrOptions } from './types'
 
-export default class tableDrawer {
+class tableDrawer {
   _el: HTMLBodyElement
-  _htOption: IOptions
+  _htOption: qrOptions
 
-  constructor(el: HTMLBodyElement, htOption: IOptions) {
+  constructor(el: HTMLBodyElement, htOption: qrOptions) {
     this._el = el
     this._htOption = htOption
   }
 
   draw(oQRCode: QRCodeModel): void {
+    this.clear()
     const nCount = oQRCode.getModuleCount()
-    const nWidth = Math.floor(this._htOption.width / nCount)
-    const nHeight = Math.floor(this._htOption.height / nCount)
+    const nWidth = this._htOption.width ? Math.floor(this._htOption.width / nCount) : 0
+    const nHeight = this._htOption.height ? Math.floor(this._htOption.height / nCount) : 0
     const aHTML = ['<table style="border:0;border-collapse:collapse;">']
 
     for (let row = 0; row < nCount; row++) {
@@ -39,8 +40,12 @@ export default class tableDrawer {
 
     // Fix the margin values as real size.
     const elTable = this._el.childNodes[0] as HTMLTableElement
-    const nLeftMarginTable = (this._htOption.width - elTable.offsetWidth) / 2
-    const nTopMarginTable = (this._htOption.height - elTable.offsetHeight) / 2
+    const nLeftMarginTable = this._htOption.width
+      ? (this._htOption.width - elTable.offsetWidth) / 2
+      : 0
+    const nTopMarginTable = this._htOption.height
+      ? (this._htOption.height - elTable.offsetHeight) / 2
+      : 0
 
     if (nLeftMarginTable > 0 && nTopMarginTable > 0) {
       elTable.style.margin = nTopMarginTable + 'px ' + nLeftMarginTable + 'px'
@@ -51,3 +56,5 @@ export default class tableDrawer {
     this._el.innerHTML = ''
   }
 }
+
+export default tableDrawer

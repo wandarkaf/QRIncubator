@@ -1,6 +1,6 @@
 import { QRMath } from './qrMath'
 
-export default class QRPolynomial {
+class QRPolynomial {
   num: number[]
   constructor(num: number[], shift: number) {
     if (num.length === undefined) {
@@ -46,3 +46,5 @@ export default class QRPolynomial {
     return new QRPolynomial(num, 0).mod(e)
   }
 }
+
+export default QRPolynomial

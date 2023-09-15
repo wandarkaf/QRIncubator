@@ -212,7 +212,7 @@ export const getAndroid = (): number => {
 
   return android
 }
-export const getTypeNumber = (sText: string, nCorrectLevel: number): number => {
+export const getTypeNumber = (sText: string, nCorrectLevel: number = 2): number => {
   let nType = 1
   const length = getUTF8Length(sText)
 

@@ -2,7 +2,6 @@
  * @fileoverview
  * - Using the 'QRCode for Javascript library'
  * - Fixed dataset of 'QRCode for Javascript library' for support full-spec.
- * - this library has no dependencies.
  *
  * @author wandarkaf
  * @see <a href="https://kazuhikoarase.github.io/qrcode-generator/js/demo/" target="_blank">https://kazuhikoarase.github.io/qrcode-generator/js/demo/</a>
@@ -24,127 +23,49 @@
 //
 //---------------------------------------------------------------------
 
-import { QRErrorCorrectLevel } from './constants'
-import { getAndroid, isSupportCanvas, getTypeNumber } from './utils'
+import type { qrOptions } from './types'
+import { getTypeNumber } from './utils'
 
 import QRCodeModel from './qrCodeModel'
-import svgDrawer from './svgDrawer'
-import canvasDrawer from './canvasDrawer'
-import tableDrawer from './tableDrawer'
+import qrDrawer from './qrDrawer'
 
 /**
- * @class QRCode
- * @constructor
+ * @function QRCode
  * @example
- * new QRCode(document.getElementById("test"), "http://jindo.dev.naver.com/collie");
+ * QRCode(document.getElementById("test"), "http://jindo.dev.naver.com/collie");
  *
  * @example
- * let oQRCode = new QRCode("test", {
+ * const oQRCode = QRCode("test", {
  *    text : "http://naver.com",
  *    width : 128,
  *    height : 128
  * });
  *
- * oQRCode.clear(); // Clear the QRCode.
- * oQRCode.makeCode("http://map.naver.com"); // Re-create the QRCode.
  *
- * @param {HTMLElement|String} el target element or 'id' attribute of element.
- * @param {Object|String} vOption
- * @param {String} vOption.text QRCode link data
- * @param {Number} [vOption.width=256]
- * @param {Number} [vOption.height=256]
- * @param {String} [vOption.colorDark="#000000"]
- * @param {String} [vOption.colorLight="#ffffff"]
- * @param {QRCode.CorrectLevel} [vOption.correctLevel=QRCode.CorrectLevel.H] [L|M|Q|H]
+ * @param {HTMLElement} el target element or 'id' attribute of element.
+ * @param {qrOptions} options
  */
-class QRCode {
-  text: string
-  width: number
-  height: number
-  typeNumber: number
-  colorDark: string
-  colorLight: string
-  correctLevel: number
-  useSVG: boolean
-  _el: HTMLBodyElement
-  _oQRCode: any
-  _oDrawing: any
-  _android = getAndroid()
-  CorrectLevel = QRErrorCorrectLevel
+const optionDefaults: qrOptions = {
+  text: '',
+  width: 256,
+  height: 256,
+  colorDark: '#000000',
+  colorLight: '#ffffff',
+  correctLevel: 2,
+  element: 'canvas'
+}
 
-  constructor(
-    el: HTMLBodyElement,
-    vOption: {
-      text: string
-      width?: number
-      height?: number
-      colorDark?: string
-      colorLight?: string
-      correctLevel?: number
-      //   useSVG?: boolean
-    }
-  ) {
-    this.text = vOption.text || ''
-    this.width = vOption.width || 256
-    this.height = vOption.height || 256
-    this.typeNumber = 4
-    this.colorDark = vOption.colorDark || '#000000'
-    this.colorLight = vOption.colorLight || '#ffffff'
-    this.correctLevel = vOption.correctLevel || QRErrorCorrectLevel.H
-    this.useSVG = document.documentElement.tagName.toLowerCase() === 'svg'
+const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
+  const _options = { ...optionDefaults, ...options }
+  const { text, correctLevel } = _options
 
-    this._el = el
-    this._oQRCode = null
-    this._oDrawing = this.useSVG
-      ? new svgDrawer(this._el, {
-          width: this.width,
-          height: this.height,
-          typeNumber: this.typeNumber,
-          colorDark: this.colorDark,
-          colorLight: this.colorLight,
-          correctLevel: this.correctLevel
-        })
-      : isSupportCanvas()
-      ? new canvasDrawer(this._el, {
-          width: this.width,
-          height: this.height,
-          typeNumber: this.typeNumber,
-          colorDark: this.colorDark,
-          colorLight: this.colorLight,
-          correctLevel: this.correctLevel
-        })
-      : new tableDrawer(this._el, {
-          width: this.width,
-          height: this.height,
-          typeNumber: this.typeNumber,
-          colorDark: this.colorDark,
-          colorLight: this.colorLight,
-          correctLevel: this.correctLevel
-        })
+  const _oQRCode = new QRCodeModel(getTypeNumber(text, correctLevel), correctLevel)
+  const _oDrawing = qrDrawer(el, _options)
 
-    if (this.text) {
-      this.makeCode(this.text)
-    }
-  }
+  _oQRCode.addData(text)
+  _oQRCode.make()
 
-  makeCode(sText: string): void {
-    this._oQRCode = new QRCodeModel(getTypeNumber(sText, this.correctLevel), this.correctLevel)
-    this._oQRCode.addData(sText)
-    this._oQRCode.make()
-    this._el.title = sText
-    this._oDrawing.draw(this._oQRCode)
-    this.makeImage()
-  }
-
-  makeImage(): void {
-    if (typeof this._oDrawing.makeImage == 'function' && (!this._android || this._android >= 3)) {
-      this._oDrawing.makeImage()
-    }
-  }
-
-  clear(): void {
-    this._oDrawing.clear()
-  }
+  _oDrawing.draw(_oQRCode)
 }
 
 export default QRCode

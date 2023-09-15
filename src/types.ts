@@ -1,10 +1,14 @@
-export type IOptions = {
-  width: number
-  height: number
-  typeNumber: number
-  colorDark: string
-  colorLight: string
-  correctLevel: number
+export type element = 'svg' | 'canvas' | 'table'
+export type correctLevel = 0 | 1 | 2 | 3
+
+export type qrOptions = {
+  text: string
+  width?: number
+  height?: number
+  colorDark?: string
+  colorLight?: string
+  correctLevel?: correctLevel
+  element?: element
 }
 
 export type svgAttrs = {
@@ -15,4 +19,9 @@ export type svgAttrs = {
   width?: string
   height?: string
   fill?: string
+}
+
+export type QRRSBlock = {
+  totalCount: number
+  dataCount: number
 }

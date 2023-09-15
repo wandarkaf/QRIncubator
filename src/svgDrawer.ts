@@ -1,11 +1,11 @@
 import type QRCodeModel from './qrCodeModel'
-import type { IOptions, svgAttrs } from './types'
+import type { qrOptions, svgAttrs } from './types'
 
-export default class svgDrawer {
+class svgDrawer {
   _el: HTMLBodyElement
-  _htOption: IOptions
+  _htOption: qrOptions
 
-  constructor(el: HTMLBodyElement, htOption: IOptions) {
+  constructor(el: HTMLBodyElement, htOption: qrOptions) {
     this._el = el
     this._htOption = htOption
   }
@@ -15,7 +15,7 @@ export default class svgDrawer {
     const nWidth = this._htOption.width ? `${this._htOption.width}px` : '100%'
     const nHeight = this._htOption.height ? `${this._htOption.height}px` : '100%'
 
-    this.clear()
+    this._clear()
 
     function makeSVG(tag: string, attrs: svgAttrs) {
       const el = document.createElementNS('http://www.w3.org/2000/svg', tag)
@@ -56,7 +56,9 @@ export default class svgDrawer {
     }
   }
 
-  clear(): void {
-    while (this._el.hasChildNodes()) this._el.removeChild(this._el.lastChild!)
+  _clear(): void {
+    this._el.innerHTML = ''
   }
 }
+
+export default svgDrawer

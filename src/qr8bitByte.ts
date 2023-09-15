@@ -1,7 +1,7 @@
 import { QRMode } from './constants'
 import type QRBitBuffer from './qrBitBuffer'
 
-export default class QR8bitByte {
+class QR8bitByte {
   data: any
   mode = QRMode.MODE_8BIT_BYTE
   parsedData: any[] = []
@@ -51,3 +51,5 @@ export default class QR8bitByte {
     }
   }
 }
+
+export default QR8bitByte

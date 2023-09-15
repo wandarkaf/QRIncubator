@@ -1,4 +1,4 @@
-export default class QRBitBuffer {
+class QRBitBuffer {
   buffer: number[] = []
   length = 0
   get(index: number) {
@@ -24,3 +24,4 @@ export default class QRBitBuffer {
     this.length++
   }
 }
+export default QRBitBuffer

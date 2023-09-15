@@ -1,25 +1,23 @@
 import type QRCodeModel from './qrCodeModel'
-import type { IOptions } from './types'
-import { getAndroid } from './utils'
+import type { qrOptions } from './types'
 
-export default class canvasDrawer {
+class canvasDrawer {
   _el: HTMLBodyElement
-  _htOption: IOptions
-
+  _htOption: qrOptions
   _elCanvas = document.createElement('canvas')
   _oContext = this._elCanvas.getContext('2d')
   _elImage = document.createElement('img')
-  _android = getAndroid()
+
   _bIsPainted = false
   _bSupportDataURI: null | boolean = null
 
-  constructor(el: HTMLBodyElement, htOption: IOptions) {
+  constructor(el: HTMLBodyElement, htOption: qrOptions) {
     this._htOption = htOption
     this._elCanvas.width = htOption.width || 256
     this._elCanvas.height = htOption.height || 256
-    el.appendChild(this._elCanvas)
     this._el = el
-
+    this._clear()
+    this._el.appendChild(this._elCanvas)
     this._elImage.alt = 'Scan me!'
     this._elImage.style.display = 'none'
     this._el.appendChild(this._elImage)
@@ -59,13 +57,12 @@ export default class canvasDrawer {
     const _htOption = this._htOption
 
     const nCount = oQRCode.getModuleCount()
-    const nWidth = _htOption.width / nCount
-    const nHeight = _htOption.height / nCount
+    const nWidth = _htOption.width ? _htOption.width / nCount : 0
+    const nHeight = _htOption.height ? _htOption.height / nCount : 0
     const nRoundedWidth = Math.round(nWidth)
     const nRoundedHeight = Math.round(nHeight)
 
     _elImage.style.display = 'none'
-    this.clear()
 
     for (let row = 0; row < nCount; row++) {
       for (let col = 0; col < nCount; col++) {
@@ -73,9 +70,11 @@ export default class canvasDrawer {
         const nLeft = col * nWidth
         const nTop = row * nHeight
         if (_oContext !== null) {
-          _oContext.strokeStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight
+          if (_htOption.colorDark && _htOption.colorLight) {
+            _oContext.strokeStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight
+            _oContext.fillStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight
+          }
           _oContext.lineWidth = 1
-          _oContext.fillStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight
           _oContext.fillRect(nLeft, nTop, nWidth, nHeight)
 
           _oContext.strokeRect(
@@ -108,11 +107,8 @@ export default class canvasDrawer {
     return this._bIsPainted
   }
 
-  clear(): void {
-    if (this._oContext) {
-      this._oContext.clearRect(0, 0, this._elCanvas.width, this._elCanvas.height)
-      this._bIsPainted = false
-    }
+  _clear(): void {
+    this._el.innerHTML = ''
   }
 
   round(nNumber: number): number {
@@ -123,3 +119,5 @@ export default class canvasDrawer {
     return Math.floor(nNumber * 1000) / 1000
   }
 }
+
+export default canvasDrawer
