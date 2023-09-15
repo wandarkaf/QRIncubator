@@ -5,9 +5,9 @@ import canvasDrawer from './canvasDrawer'
 import tableDrawer from './tableDrawer'
 
 const qrDrawer = (el: HTMLBodyElement, options: qrOptions) => {
-  return options.element === 'svg'
+  return options.tag === 'svg'
     ? new svgDrawer(el, options)
-    : isSupportCanvas() && options.element === 'canvas'
+    : isSupportCanvas() && options.tag === 'canvas'
     ? new canvasDrawer(el, options)
     : new tableDrawer(el, options)
 }

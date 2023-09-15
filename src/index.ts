@@ -23,7 +23,7 @@
 //
 //---------------------------------------------------------------------
 
-import type { qrOptions } from './types'
+import type { qrOptions, qrTag } from './types'
 import { getTypeNumber } from './utils'
 
 import QRCodeModel from './qrCodeModel'
@@ -42,20 +42,20 @@ import qrDrawer from './qrDrawer'
  * });
  *
  *
- * @param {HTMLElement} el target element or 'id' attribute of element.
+ * @param {HTMLBodyElement} el target element or 'id' attribute of element.
  * @param {qrOptions} options
  */
-const optionDefaults: qrOptions = {
+export const optionDefaults: qrOptions = {
   text: '',
   width: 256,
   height: 256,
   colorDark: '#000000',
   colorLight: '#ffffff',
   correctLevel: 2,
-  element: 'canvas'
+  tag: 'canvas'
 }
 
-const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
+export const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
   const _options = { ...optionDefaults, ...options }
   const { text, correctLevel } = _options
 
@@ -68,4 +68,4 @@ const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
   _oDrawing.draw(_oQRCode)
 }
 
-export default QRCode
+export type { qrOptions, qrTag }

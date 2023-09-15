@@ -1,4 +1,4 @@
-export type element = 'svg' | 'canvas' | 'table'
+export type qrTag = 'svg' | 'canvas' | 'table'
 export type correctLevel = 0 | 1 | 2 | 3
 
 export type qrOptions = {
@@ -8,7 +8,7 @@ export type qrOptions = {
   colorDark?: string
   colorLight?: string
   correctLevel?: correctLevel
-  element?: element
+  tag?: qrTag
 }
 
 export type svgAttrs = {
