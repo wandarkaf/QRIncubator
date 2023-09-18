@@ -53,7 +53,14 @@ export const optionDefaults: qrOptions = {
  *
  *
  * @param {HTMLBodyElement} el - target element for Quick Response draw implementation.
- * @param {import("./types").qrOptions} options
+ * @param {Object} options - options object.
+ * @param {string} options.text
+ * @param {number} [options.width=256] - width size of QR Code.
+ * @param {number} [options.height=256] - height size of QR Code.
+ * @param {string} [options.colorDark='#000000'] - color of QR Code.
+ * @param {string} [options.colorLight='#ffffff'] - background color of QR Code.
+ * @param {number} [options.correctLevel=2] - correct level of QR Code.
+ * @param {string} [options.tag='canvas'] - tag type of QR Code. ('canvas', 'svg', 'table')
  */
 export const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
   const _options = { ...optionDefaults, ...options }
