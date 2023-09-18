@@ -30,20 +30,20 @@ import QRCodeModel from './qrCodeModel'
 import qrDrawer from './qrDrawer'
 
 /**
- * @function QRCode
+ * QR code implementation for Javascript.
  * @example
  * QRCode(document.getElementById("test"), "http://jindo.dev.naver.com/collie");
  *
  * @example
- * const oQRCode = QRCode("test", {
+ * const oQRCode = QRCode(document.getElementById("test"), {
  *    text : "http://naver.com",
  *    width : 128,
  *    height : 128
  * });
  *
  *
- * @param {HTMLBodyElement} el target element or 'id' attribute of element.
- * @param {qrOptions} options
+ * @param {HTMLBodyElement} el - target element for Quick Response draw implementation.
+ * @param {import("./types").qrOptions} options
  */
 export const optionDefaults: qrOptions = {
   text: '',
