@@ -42,23 +42,19 @@ export const optionDefaults: qrOptions = {
 /**
  * QR code implementation for Javascript.
  * @example
+ * ```js
  * QRCode(document.getElementById("test"), "http://jindo.dev.naver.com/collie");
- *
+ *```
  * @example
+ *```js
  * const oQRCode = QRCode(document.getElementById("test"), {
  *    text : "http://naver.com",
  *    width : 128,
  *    height : 128
  * });
+ * ```
  * @param {HTMLBodyElement} el - target element for Quick Response draw implementation.
- * @param {Object} options - options object for Quick Response draw implementation.
- * @param {string} options.text
- * @param {number} options.width - width size of QR Code.
- * @param {number} options.height - height size of QR Code.
- * @param {string} options.colorDark - color of QR Code.
- * @param {string} options.colorLight - background color of QR Code.
- * @param {number} options.correctLevel - correct level of QR Code.
- * @param {string} options.tag - tag type of QR Code. ('canvas', 'svg', 'table')
+ * @param {import('./types').qrOptions} options - options object for Quick Response draw implementation.
  */
 export const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
   const _options = { ...optionDefaults, ...options }
