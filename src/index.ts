@@ -29,6 +29,16 @@ import { getTypeNumber } from './utils'
 import QRCodeModel from './qrCodeModel'
 import qrDrawer from './qrDrawer'
 
+export const optionDefaults: qrOptions = {
+  text: '',
+  width: 256,
+  height: 256,
+  colorDark: '#000000',
+  colorLight: '#ffffff',
+  correctLevel: 2,
+  tag: 'canvas'
+}
+
 /**
  * QR code implementation for Javascript.
  * @example
@@ -45,16 +55,6 @@ import qrDrawer from './qrDrawer'
  * @param {HTMLBodyElement} el - target element for Quick Response draw implementation.
  * @param {import("./types").qrOptions} options
  */
-export const optionDefaults: qrOptions = {
-  text: '',
-  width: 256,
-  height: 256,
-  colorDark: '#000000',
-  colorLight: '#ffffff',
-  correctLevel: 2,
-  tag: 'canvas'
-}
-
 export const QRCode = (el: HTMLBodyElement, options: qrOptions): void => {
   const _options = { ...optionDefaults, ...options }
   const { text, correctLevel } = _options
